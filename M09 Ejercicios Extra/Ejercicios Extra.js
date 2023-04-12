@@ -6,6 +6,20 @@ function deObjetoAarray(objeto) {
    // Estos elementos debe ser cada par clave:valor del objeto recibido.
    // [EJEMPLO]: {D: 1, B: 2, C: 3} ---> [['D', 1], ['B', 2], ['C', 3]].
    // Tu código:
+
+   let array = []
+   let clave = Object.keys(objeto)
+   // for (x in objeto){
+   //    array.push(objeto[x]);
+   // }
+   // return array;
+
+   for( let i=0; i< clave.length; i++){
+      let letras = clave[i];
+      array.push([letras , objeto[letras]])
+   }
+
+   return array;
 }
 
 function numberOfCharacters(string) {
@@ -14,7 +28,24 @@ function numberOfCharacters(string) {
    // Las letras deben estar en orden alfabético.
    // [EJEMPLO]: "adsjfdsfsfjsdjfhacabcsbajda" ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 }
    // Tu código:
+
+   let ordenada = string.split("").sort(function (a, b) {
+      return a.charCodeAt(0) - b.charCodeAt(0);
+   }).join('');
+
+   let object = {}
+   for (let i = 0; i < ordenada.length; i++){
+      if(Object.keys(object).includes(ordenada[i])){
+         object[ordenada[i]] ++;
+      }else{
+         object[ordenada[i]] = 1;
+      }
+   }
+   return object;
+
 }
+
+console.log(numberOfCharacters("adsjffskdjflasjdfalksjdfsajdñkl"));
 
 function capToFront(string) {
    // Recibes un string con algunas letras en mayúscula y otras en minúscula.
@@ -22,6 +53,19 @@ function capToFront(string) {
    // Retornar el string.
    // [EJEMPLO]: soyHENRY ---> HENRYsoy
    // Tu código:
+   let results = "";
+   let mayus = "";
+   let minus = "";
+
+   for (let i = 0; i < string.length; i++) {
+      if (string[i] === string[i].toUpperCase()) {
+         mayus += string[i];
+      }else{
+         minus += string[i]
+      }
+   }
+   return results = mayus + minus
+
 }
 
 function asAmirror(frase) {
@@ -29,12 +73,25 @@ function asAmirror(frase) {
    // La diferencia es que cada palabra estará escrita al inverso.
    // [EJEMPLO]: "The Henry Challenge is close!"  ---> "ehT yrneH egnellahC si !esolc"
    // Tu código:
+
+   let arrayFrase = frase.split(" ");
+   let fraseEspejo = [];
+
+   for (let i = 0; i < arrayFrase.length; i++) {
+      let espejo = arrayFrase[i].split("").reverse().join("");
+      fraseEspejo.push(espejo);
+   }
+   return fraseEspejo.join(" ");
 }
 
 function capicua(numero) {
    // Si el número que recibes es capicúa debes retornar el string: "Es capicua".
    // Caso contrario: "No es capicua".
    // Tu código:
+      //213           ["2","1","3"]     ["3","1","2"]    //"321"
+   let num = numero.toString().split("").reverse().join("");
+   if (num == numero) return "Es capicua";
+   return "No es capicua";
 }
 
 function deleteAbc(string) {
